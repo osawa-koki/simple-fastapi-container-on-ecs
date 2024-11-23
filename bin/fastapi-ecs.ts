@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
+
 import { FastapiEcsStack } from '../lib/fastapi-ecs-stack';
+import { BASE_STACK_NAME } from '../lib/const';
 
 const app = new cdk.App();
-new FastapiEcsStack(app, 'FastapiEcsStack', {
+
+new FastapiEcsStack(app, BASE_STACK_NAME, {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
