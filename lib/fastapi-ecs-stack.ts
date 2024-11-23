@@ -1,6 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import NetworkStack from './network/network';
 
 export class FastapiEcsStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -12,5 +12,7 @@ export class FastapiEcsStack extends cdk.Stack {
     // const queue = new sqs.Queue(this, 'FastapiEcsQueue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
+
+    new NetworkStack(this, 'NetworkStack');
   }
 }
