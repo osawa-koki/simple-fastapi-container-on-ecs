@@ -20,6 +20,7 @@ export class FastapiEcsStack extends cdk.Stack {
     // ECSクラスターの作成
     const cluster = new ecs.Cluster(this, 'FargateCluster', {
       vpc: networkStack.vpc,
+      clusterName: 'FastapiEcsCluster',
     });
 
     // Fargateタスク定義の作成
@@ -45,10 +46,12 @@ export class FastapiEcsStack extends cdk.Stack {
     const container = taskDefinition.addContainer('WebContainer', {
       image: ecs.ContainerImage.fromRegistry(process.env.ECR_REPOSITORY_URI!),
       logging: ecs.LogDrivers.awsLogs({ streamPrefix: 'FargateWebApp' }),
+      containerName: 'FastapiEcsContainer',
     });
     // コンテナのポートマッピング
     container.addPortMappings({
       containerPort: 80,
+      hostPort: 80,
     });
 
     // Fargateサービスの作成（ALBを使用）
@@ -58,6 +61,7 @@ export class FastapiEcsStack extends cdk.Stack {
       publicLoadBalancer: true,
       desiredCount: 1,
       assignPublicIp: false,
+      listenerPort: 80,
     });
 
     // インバウンドルールの調整
