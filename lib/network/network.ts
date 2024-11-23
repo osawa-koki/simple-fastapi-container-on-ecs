@@ -11,6 +11,7 @@ export default class NetworkStack extends cdk.Stack {
     // VPCの作成
     this.vpc = new ec2.Vpc(this, 'FargateVpc', {
       maxAzs: 2,
+      natGateways: 1,
       subnetConfiguration: [
         {
           cidrMask: 24,

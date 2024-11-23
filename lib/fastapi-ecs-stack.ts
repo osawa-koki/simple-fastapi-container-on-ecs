@@ -57,7 +57,7 @@ export class FastapiEcsStack extends cdk.Stack {
       taskDefinition,
       publicLoadBalancer: true,
       desiredCount: 1,
-      assignPublicIp: true, // パブリックサブネットでの起動を確実にするためにパブリックIPを付与
+      assignPublicIp: false,
     });
 
     // インバウンドルールの調整
@@ -81,3 +81,4 @@ export class FastapiEcsStack extends cdk.Stack {
     });
   }
 }
+
