@@ -81,4 +81,3 @@ export class FastapiEcsStack extends cdk.Stack {
     });
   }
 }
-
