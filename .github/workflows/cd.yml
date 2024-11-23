@@ -39,4 +39,4 @@ jobs:
       - name: Bootstrap
         run: cdk bootstrap
       - name: Deploy
-        run: cdk deploy
+        run: cdk deploy --require-approval never --all
