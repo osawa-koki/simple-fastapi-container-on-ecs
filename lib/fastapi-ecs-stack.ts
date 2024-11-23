@@ -5,7 +5,11 @@ import * as ecsPatterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as iam from 'aws-cdk-lib/aws-iam';
 
+import * as dotenv from 'dotenv';
+
 import NetworkStack from './network/network';
+
+dotenv.config();
 
 export class FastapiEcsStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -39,7 +43,7 @@ export class FastapiEcsStack extends cdk.Stack {
     );
 
     const container = taskDefinition.addContainer('WebContainer', {
-      image: ecs.ContainerImage.fromRegistry('938385028059.dkr.ecr.ap-northeast-1.amazonaws.com/fastapi-app'),
+      image: ecs.ContainerImage.fromRegistry(process.env.ECR_REPOSITORY_URI!),
       logging: ecs.LogDrivers.awsLogs({ streamPrefix: 'FargateWebApp' }),
     });
     // コンテナのポートマッピング
